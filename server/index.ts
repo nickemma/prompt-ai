@@ -4,7 +4,7 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 
-// import chatRoute from './routes/chatRoute';
+import chatRoute from './routes/chatRoute';
 
 const app = express();
 //============= Middlewares
@@ -22,11 +22,13 @@ app.get('/', (req, res) => {
 });
 
 //============= Routes
-// app.use('/api/chat', chatRoute);
+app.use('/api', chatRoute);
 
 //============= Server
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server running on port http://localhost:${PORT}`);
 });
+
+server.timeout = 30000;
